@@ -1,0 +1,93 @@
+/*!
+Theme Name: Kadence Wadiweb Child
+Theme URI: https://www.wadiweb.com/
+Author: Kadence WP Wadiweb Child
+Author URI: https://www.wadiweb.com/
+Description: Kadence Theme is a lightweight yet full featured WordPress theme for creating beautiful fast loading and accessible websites, easier than ever. It features an easy to use drag and drop header and footer builder to build any type of header in minutes. It features a full library of gorgeous starter templates that are easy to modify with our intelligent global font and color controls. With extensive integration with the most popular 3rd party plugins, you can quickly build impressive ecommerce websites, course websites, business websites, and more.Child Wadi Theme.
+Version: 1.0.0
+Template: kadence
+License: GNU General Public License v3.0 (or later)
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Text Domain: kadence-wadiweb-child
+Requires at least: 5.4
+Tested up to: 6.0
+Tags: translation-ready, two-columns, right-sidebar, left-sidebar, footer-widgets, blog, custom-logo, custom-background, custom-menu, rtl-language-support, editor-style, threaded-comments, custom-colors, featured-images, wide-blocks, full-width-template, theme-options, e-commerce
+Requires PHP: 7.2
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share
+what you've learned with others.
+*/
+
+
+/*!
+ * Kadence Wadiweb Child
+ */
+
+ .wadi_docs_container {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.8rem;
+    margin: 2rem;
+ }
+ .wadi_doc_box_container {
+   background-color: #fbfbfb;
+   color: black;
+   padding: 30px;
+   display: flex;
+   border: 1px solid #b1b1b1;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .wadi_doc_box_container a {
+    text-decoration: none;
+ }
+
+ .wadi_doc_container {
+    position: relative;
+ }
+
+ .wadi_doc_container main {
+    display: block;
+    min-width: 0;
+    float: left;
+    width: 75%;
+    padding: 1rem;
+}
+
+ .wadi_doc_container aside.wadi_doc_sidebar {
+    float: right;
+    width: 25%;
+    padding: 1rem;
+}
+
+.wadi_doc_container aside.wadi_doc_sidebar .wadi_doc_categories_container {
+    border-left: 1px solid #b1b1b1;
+    padding: 1.5rem;
+}
+
+.wadi_doc_container aside.wadi_doc_sidebar .wadi_doc_categories_container .wadi_doc_categories_heading_text {
+    margin-bottom: 1rem;
+}
+.wadi_doc_container aside.wadi_doc_sidebar .wadi_doc_categories_container ul {
+    list-style: none;
+}
+
+.wadi_doc_container aside.wadi_doc_sidebar .wadi_doc_categories_container ul li a{
+   margin-bottom: 0.5rem;
+   text-decoration: none;
+}
+
+.wadi_taxonomies_docs_container {
+   display: grid;
+   grid-template-columns: 6fr 2fr;
+}
+
+.wadi_taxonomies_docs_container .wadi_docs_container {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+   gap: 1.8rem;
+   margin: 2rem;
+}
