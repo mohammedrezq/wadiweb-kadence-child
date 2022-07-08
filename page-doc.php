@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Docs
+ * Template Name: Docs Page
  *
  * @package kadence
  */
@@ -14,7 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 // Get All Docs Categories
-
 $args = array(
 	'taxonomy' => 'docs-category',
 	'orderby' => 'name',
