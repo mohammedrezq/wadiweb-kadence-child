@@ -12,6 +12,9 @@ namespace Kadence;
 */
 
 get_header();
+
+$terms = get_terms('docs-category');
+
 ?>
 <div id="primary" class="content-area">
 	<div class="content-container site-container wadi_doc_container">
@@ -33,6 +36,18 @@ get_header();
 						 * Hook in content single entry template.
 						 */
 						do_action( 'kadence_single_content' );
+						if(count($terms) > 0 ) :
+							echo '<div>';
+							foreach ($terms as $key => $term) {
+								echo '<span><a href="'.get_term_link($term->slug, 'docs-category').'">'.$term->name.'</a></span>';
+								if ($key === array_key_last($terms)) {
+									echo '';
+								}else {
+									echo ' | ';
+								}
+							}
+							echo '</div>';
+						endif;
 					}
 				} else {
 					get_template_part( 'template-parts/content/error' );

@@ -24,7 +24,15 @@ what you've learned with others.
  * Kadence Wadiweb Child
  */
 
- .wadi_docs_container {
+
+ .go_back_to_main_page_button {
+   margin: 2rem;
+ }
+ .wadi_docs_categories_heading {
+   margin: 2rem;
+ }
+
+ .wadi_docs_categories {
 
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -39,10 +47,19 @@ what you've learned with others.
    border: 1px solid #b1b1b1;
    justify-content: center;
    align-items: center;
+   position: relative;
+   width: 100%;
+    min-height: 100px;
  }
 
  .wadi_doc_box_container a {
     text-decoration: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
  }
 
  .wadi_doc_container {
@@ -80,14 +97,66 @@ what you've learned with others.
    text-decoration: none;
 }
 
-.wadi_taxonomies_docs_container {
+.wadi_taxonomies_docs_container_category_docs {
    display: grid;
    grid-template-columns: 6fr 2fr;
 }
 
-.wadi_taxonomies_docs_container .wadi_docs_container {
+.wadi_taxonomies_docs_container_category_docs .wadi_docs_container {
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
    gap: 1.8rem;
    margin: 2rem;
+}
+
+.wadi_taxonomies_docs_container_category_docs .wadi_sidebar_doc {
+   border-left: 1px solid #b1b1b1;
+    padding: 1.5rem;
+}
+.wadi_sidebar_doc .wadi_doc_categories_heading_text {
+   margin-bottom: 1rem;
+}
+.wadi_sidebar_doc  ul li {
+   list-style: none;
+}
+.wadi_sidebar_doc  ul li a {
+   text-decoration: none;
+}
+
+
+@media  only screen and (max-width: 768px) {
+   .wadi_taxonomies_docs_container_category_docs {
+      grid-template-columns: none;
+      grid-template-rows: auto;
+      padding: 1rem;
+
+   }
+
+   .wadi_taxonomies_docs_container_category_docs .wadi_sidebar_doc {
+      border-left: none;
+      border-top: 1px solid #b1b1b1;
+      padding: 1.5rem;
+   }
+   
+
+   /**
+   Posts Container
+   */
+
+      
+   .wadi_doc_container main {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+   }
+
+   .wadi_doc_container aside.wadi_doc_sidebar {
+      width: 100%;
+      padding: 1rem;
+   }
+   .wadi_doc_container aside.wadi_doc_sidebar .wadi_doc_categories_container {
+      border-left: none;
+      border-top: 1px solid #b1b1b1;
+      padding: 1.5rem;
+  }
 }

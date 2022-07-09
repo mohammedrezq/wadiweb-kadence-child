@@ -11,9 +11,34 @@ namespace Kadence;
 
 
 get_header();
+$pages = get_pages(array(
+    'meta_key' => '_wp_page_template',
+    'meta_value' => 'page-doc.php'
+));
+
+$doc_page = '';
+foreach($pages as $page){
+    
+    $doc_page .= get_permalink($page->ID);
+}
+
 ?>
 <div class="wadi_taxonomies_docs_container">
 
+<div class="go_back_to_main_page_button">
+		<a href="<?php
+        echo wp_kses_post($doc_page);
+        ?>">
+			&larr; Go Back to <?php echo wp_kses_post($page->post_title); ?>
+		</a>
+	</div>
+	<div class="wadi_docs_categories_heading">
+		<h1><?php 
+        $term = get_queried_object();
+        echo wp_kses_post($term->name); ?></h1>
+	</div>
+
+    <div class="wadi_taxonomies_docs_container_category_docs">
 <?php
 // Check if current page is a docs category page
 if (is_tax('docs-category')) {
@@ -53,9 +78,10 @@ if (is_tax('docs-category')) {
     <?php
     endforeach;
 }
+
  echo "</div>";
 get_sidebar('doc'); ?>
-
+</div>
 </div>
 
 <?php get_footer();

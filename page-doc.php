@@ -23,7 +23,19 @@ $args = array(
 
 $cats = get_terms($args);
 
-echo '<div class="wadi_docs_container">';
+
+?>
+<div class="wadi_docs_container">
+	<div class="go_back_to_main_page_button">
+		<a href="<?php echo get_home_url() ?>">
+			&larr; Go Back to Main Page
+		</a>
+	</div>
+	<div class="wadi_docs_categories_heading">
+		<h1><?php echo wp_kses_post(get_the_title()); ?></h1>
+	</div>
+	<div class="wadi_docs_categories">
+<?php
 
 
 foreach ($cats as $cat) : ?>
@@ -39,7 +51,10 @@ foreach ($cats as $cat) : ?>
 <?php
 endforeach;
 
-echo '</div>';
+?>
+	</div>
+</div>
+<?php
 	
 
 
