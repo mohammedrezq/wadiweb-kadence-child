@@ -136,3 +136,38 @@ function wadi_docs_sidebar() {
 }
 
 add_action( 'widgets_init', 'wadi_docs_sidebar' );
+
+
+add_filter( 'bbp_default_styles', 'rew_dequeue_bbpress_css' );
+
+function rew_dequeue_bbpress_css ($defaults ){
+	fixed_bbp_enqueue_style("bbp-default", "css/bbpress.css", array(), bbp_get_version());
+	unset ($defaults['bbp-default']) ;
+	return $defaults ;
+}
+
+function fixed_bbp_enqueue_style( $handle = '', $file = '', $deps = array(), $ver = false, $media = 'all' ) {
+        // Attempt to locate an enqueueable
+        $located = bbp_locate_enqueueable( $file );
+	$located = str_replace('/bitnami/wordpress', '', $located);
+		
+        // Enqueue if located
+        if ( ! empty( $located ) ) {
+
+                // Make sure there is always a version
+                if ( empty( $ver ) ) {
+                        $ver = bbp_get_version();
+                }
+
+                // Make path to file relative to site URL
+                $located = bbp_urlize_enqueueable( $located );
+
+                // Register the style
+                wp_register_style( $handle, $located, $deps, $ver, $media );
+
+                // Enqueue the style
+                wp_enqueue_style( $handle );
+        }
+
+        return $located;
+}
