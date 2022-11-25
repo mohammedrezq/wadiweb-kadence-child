@@ -1,0 +1,5 @@
+vendor
+node_modules
+assets/dist
+assets/min
+composer.lock

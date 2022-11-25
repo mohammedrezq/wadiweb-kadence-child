@@ -1,0 +1,21 @@
+{
+    "name": "wadiweb/kadence-child",
+    "description": "Wadiweb child theme on Kadence",
+    "type": "project",
+    "license": "GPL v3.0",
+    "autoload": {
+        "psr-4": {
+            "WadiAddons\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mohammed Rezq",
+            "email": "mohammedrezq@wadiweb.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "htmlburger/carbon-fields": "^3.4@beta"
+    }
+}

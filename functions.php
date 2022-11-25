@@ -1,4 +1,7 @@
 <?php
+use Carbon_Fields\Block;
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
 
 // add_action( 'wp_enqueue_scripts', 'kadence_wadiweb_child_styles' );
 // function kadence_wadiweb_child_styles() {
@@ -12,7 +15,10 @@
  * Enqueue child styles.
  */
 function child_enqueue_styles() {
-	wp_enqueue_style( 'child-theme', get_stylesheet_directory_uri() . '/style.css', array(), 100 );
+
+	wp_enqueue_script( 'wadi_child_theme_script', get_stylesheet_directory_uri() . '/assets/dist/wadi-basic.js', array(), 100 );
+	wp_enqueue_style( 'wadi_child_theme', get_stylesheet_directory_uri() . '/assets/dist/wadi-basic.css', array(), 'all' );
+	wp_enqueue_style( 'wadi_child_theme_style', get_stylesheet_directory_uri() . '/style.css', array(), 'all' );
 }
 
 add_action( 'wp_enqueue_scripts', 'child_enqueue_styles' ); // Remove the // from the beginning of this line if you want the child theme style.css file to load on the front end of your site.
@@ -171,3 +177,59 @@ function fixed_bbp_enqueue_style( $handle = '', $file = '', $deps = array(), $ve
 
         return $located;
 }
+
+add_action( 'carbon_fields_register_fields', 'crb_attach_theme_options' );
+function crb_attach_theme_options() {
+    Container::make( 'theme_options', __( 'Theme Options' ) )
+        ->add_fields( array(
+            Field::make( 'text', 'crb_text', 'Text Field' ),
+        ) );
+
+        
+    Block::make( __( 'My Shiny Gutenberg Block' ) )
+    // ->where( 'post_type', '=', 'doc' )
+    ->add_fields( array(
+        Field::make( 'text', 'heading', __( 'Block Heading' ) ),
+        Field::make( 'image', 'image', __( 'Block Image' ) ),
+        Field::make( 'rich_text', 'content', __( 'Block Content' ) ),
+    ) )
+    ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+        ?>
+
+        <div class="block">
+            <div class="block__heading">
+                <h1><?php echo esc_html( $fields['heading'] ); ?></h1>
+            </div><!-- /.block__heading -->
+
+            <div class="block__image">
+                <?php echo wp_get_attachment_image( $fields['image'], 'full' ); ?>
+            </div><!-- /.block__image -->
+
+            <div class="block__content">
+                <?php echo apply_filters( 'the_content', $fields['content'] ); ?>
+            </div><!-- /.block__content -->
+        </div><!-- /.block -->
+
+        <?php
+    } );
+
+    Container::make( 'post_meta', __( 'Docs Options' ) )
+    ->where( 'post_type', '=', 'doc' ) // only show our new fields on pages
+    ->add_fields( array(
+        Field::make( 'complex', 'crb_slides', 'Slides' )
+            ->set_layout( 'tabbed-horizontal' )
+            ->add_fields( array(
+                Field::make( 'text', 'title', 'Title' ),
+                Field::make( 'color', 'title_color', 'Title Color' ),
+                Field::make( 'image', 'image', 'Image' ),
+            ) ),
+    ) );
+}
+
+add_action( 'after_setup_theme', 'crb_load' );
+
+function crb_load() {
+    require_once( 'vendor/autoload.php' );
+    \Carbon_Fields\Carbon_Fields::boot();
+}
+

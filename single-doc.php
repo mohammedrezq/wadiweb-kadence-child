@@ -32,6 +32,16 @@ $terms = get_terms('docs-category');
 				} elseif ( have_posts() ) {
 					while ( have_posts() ) {
 						the_post();
+						$slides = carbon_get_the_post_meta( 'crb_slides' );
+						// $slides = carbon_get_post_meta(get_the_ID(), 'crb_slides');
+						echo '<ul>';
+						foreach ( $slides as $slide ) {
+							echo '<li>';
+							echo wp_get_attachment_image( $slide['image'] );
+							echo '<h2 style="color: ' . $slide['color'] . '">' . $slide['title'] . '</h2>';
+							echo '</li>';
+						}
+						echo '</ul>';
 						/**
 						 * Hook in content single entry template.
 						 */
